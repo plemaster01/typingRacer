@@ -1,5 +1,4 @@
 import copy
-import nltk as nltk
 import pygame
 import random
 
@@ -7,24 +6,22 @@ import asyncio
 
 pygame.init()
 
-import nltk
-# nltk.download('words')
-# nltk.download('popular')
-from nltk.corpus import words
-
-# from nltk import popular
-# from nltk.corpus import popular
 
 len_indexes = []
 length = 1
-
-wordlist = words.words()
+from word_list import wordlist
+'''wordlist = []
+file = open('words.txt', 'r')
+read = file.readlines()
+for line in read:
+    wordlist.append(line.replace('\n', ''))
+file.close()'''
 wordlist.sort(key=len)
-# print(len(wordlist))
 for i in range(len(wordlist)):
     if len(wordlist[i]) > length:
         length += 1
         len_indexes.append(i)
+len_indexes.append(len(wordlist))
 
 # print(len_indexes)
 
@@ -54,8 +51,8 @@ woosh.set_volume(0.2)
 wrong.set_volume(0.3)
 
 # game variables
-level = 10
-lives = 50
+level = 1
+lives = 5
 word_objects = []
 file = open('high_score.txt', 'r')
 read = file.readlines()
@@ -201,7 +198,6 @@ async def main():
     global score, header_font, pause_font, banner_font, font, length
     global click, woosh, wrong, active_string, letters, choices, wordlist, pygame
     global level, lives, file, word_objects, high_score, read, pz, new_level, submit
-
 
     run = True
     while run:
